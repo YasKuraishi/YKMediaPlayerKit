@@ -50,7 +50,12 @@ Exactly the same for **Vimeo** videos.
     
     //Then play 
      [directVideo play:YKQualityHigh];
-    
+
+### How To Setup    
+
+If using `CocoaPods` then add this to your pods file `pod 'YKMediaPlayerKit'` and update pods
+
+Or, simply drag and drop `YKMediaPlayerKit` folder to your project.
 
 ###  License
 
