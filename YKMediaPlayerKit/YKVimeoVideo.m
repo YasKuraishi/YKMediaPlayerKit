@@ -8,7 +8,7 @@
 
 #import "YKVimeoVideo.h"
 
-NSString *const kVideoConfigURL = @"http://player.vimeo.com/v2/video/%@/config";
+NSString *const kVideoConfigURL = @"http://player.vimeo.com/video/%@/config";
 
 @interface YKVimeoVideo()
 @property (nonatomic, strong) NSString *videoID;
