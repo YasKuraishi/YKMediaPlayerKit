@@ -1,5 +1,7 @@
 YKMediaPlayerKit
 ================
+[Please do not use this branch, its still work in progress!] 
+
 Painlessly and natively **play** YouTube, Vimeo, and .MP4, .MOV, .MPV, .3GP videos and fetch **thumbnails** on your iOS devices.
 
 ### Overview
