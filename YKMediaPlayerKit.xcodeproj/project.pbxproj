@@ -26,6 +26,7 @@
 		2B8EAB6E18D25EF600F21000 /* YKMediaPlayerKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EAB6418D25EF600F21000 /* YKMediaPlayerKit.m */; };
 		2B8EAB6F18D25EF600F21000 /* YKVimeoVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EAB6718D25EF600F21000 /* YKVimeoVideo.m */; };
 		2B8EAB7018D25EF600F21000 /* YKYouTubeVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B8EAB6918D25EF600F21000 /* YKYouTubeVideo.m */; };
+		2B9896B7197BA3000075AD44 /* YKUnKnownVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9896B6197BA3000075AD44 /* YKUnKnownVideo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		2B8EAB6718D25EF600F21000 /* YKVimeoVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKVimeoVideo.m; sourceTree = "<group>"; };
 		2B8EAB6818D25EF600F21000 /* YKYouTubeVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKYouTubeVideo.h; sourceTree = "<group>"; };
 		2B8EAB6918D25EF600F21000 /* YKYouTubeVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKYouTubeVideo.m; sourceTree = "<group>"; };
+		2B9896B5197BA3000075AD44 /* YKUnKnownVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKUnKnownVideo.h; sourceTree = "<group>"; };
+		2B9896B6197BA3000075AD44 /* YKUnKnownVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKUnKnownVideo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +185,8 @@
 				2B8EAB6918D25EF600F21000 /* YKYouTubeVideo.m */,
 				2B8EAB6118D25EF600F21000 /* YKDirectVideo.h */,
 				2B8EAB6218D25EF600F21000 /* YKDirectVideo.m */,
-				2B8EAB6A18D25EF600F21000 /* YTVimeoExtractor */,
+				2B9896B5197BA3000075AD44 /* YKUnKnownVideo.h */,
+				2B9896B6197BA3000075AD44 /* YKUnKnownVideo.m */,
 			);
 			path = YKMediaPlayerKit;
 			sourceTree = "<group>";
@@ -194,21 +198,6 @@
 				2B8EAB5F18D25EF600F21000 /* HCYoutubeParser.m */,
 			);
 			path = HCYoutubeParser;
-			sourceTree = "<group>";
-		};
-		2B8EAB6A18D25EF600F21000 /* YTVimeoExtractor */ = {
-			isa = PBXGroup;
-			children = (
-				2B8EAB6B18D25EF600F21000 /* YTVimeoExtractor */,
-			);
-			path = YTVimeoExtractor;
-			sourceTree = "<group>";
-		};
-		2B8EAB6B18D25EF600F21000 /* YTVimeoExtractor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = YTVimeoExtractor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B8EAB6F18D25EF600F21000 /* YKVimeoVideo.m in Sources */,
+				2B9896B7197BA3000075AD44 /* YKUnKnownVideo.m in Sources */,
 				2B087ECD18CB033900D31A86 /* ViewController.m in Sources */,
 				2B8EAB6C18D25EF600F21000 /* HCYoutubeParser.m in Sources */,
 				2B8EAB7018D25EF600F21000 /* YKYouTubeVideo.m in Sources */,

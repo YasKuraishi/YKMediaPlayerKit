@@ -17,6 +17,7 @@ NSString *const kYouTubeVideo = @"http://www.youtube.com/watch?v=1hZ98an9wjo";
 NSString *const kVimeoVideo = @"http://vimeo.com/42893621";
 NSString *const kDirectVideo = @"http://download.wavetlan.com/SVV/Media/HTTP/H264/Talkinghead_Media/H264_test1_Talkinghead_mp4_480x360.mp4";
 NSString *const kOtherVideo = @"http://download.wavetlan.com/SVV/Media/HTTP/BlackBerry.mov";
+NSString *const kUnknownVideo = @"http://www.dailymotion.com/video/x21nmr3_exclusive-watch-lego-builders-create-groot_lifestyle";
 
 @interface ViewController ()
 
@@ -24,6 +25,7 @@ NSString *const kOtherVideo = @"http://download.wavetlan.com/SVV/Media/HTTP/Blac
 @property (weak, nonatomic) IBOutlet UIImageView *vimeoView;
 @property (weak, nonatomic) IBOutlet UIImageView *mp4View;
 @property (weak, nonatomic) IBOutlet UIImageView *otherVideoView;
+@property (weak, nonatomic) IBOutlet UIImageView *unknownVideoView;
 
 @end
 
@@ -32,6 +34,7 @@ NSString *const kOtherVideo = @"http://download.wavetlan.com/SVV/Media/HTTP/Blac
     YKVimeoVideo    *_vimeoVideo;
     YKDirectVideo   *_directVideo;
     YKDirectVideo   *_otherVideo;
+    YKUnKnownVideo  *_unknownVideo;
 }
 
 - (void)viewDidLoad {
@@ -60,6 +63,11 @@ NSString *const kOtherVideo = @"http://download.wavetlan.com/SVV/Media/HTTP/Blac
     [_otherVideo thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
         self.otherVideoView.image = thumbImage;
     }];
+    
+    _unknownVideo = [[YKUnKnownVideo alloc] initWithContent:[NSURL URLWithString:kUnknownVideo]];
+    [_unknownVideo thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
+        self.otherVideoView.image = thumbImage;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,6 +90,10 @@ NSString *const kOtherVideo = @"http://download.wavetlan.com/SVV/Media/HTTP/Blac
 
 - (IBAction)otherButtonPressed:(UIButton *)sender {
     [_otherVideo play:YKQualityLow];
+}
+
+- (IBAction)unknownButtonPressed:(UIButton *)sender {
+    [_unknownVideo play:YKQualityLow];
 }
 
 @end

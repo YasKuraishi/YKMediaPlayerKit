@@ -13,6 +13,7 @@
 #import "YKYouTubeVideo.h"
 #import "YKVimeoVideo.h"
 #import "YKDirectVideo.h"
+#import "YKUnKnownVideo.h"
 
 typedef NS_ENUM(NSUInteger, YKVideoTypeOptions) {
     YKVideoTypeYouTube,

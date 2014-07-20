@@ -27,7 +27,7 @@ CGFloat const kDirectThumbnailLocation = 1.0;
 }
 
 - (void)parseWithCompletion:(void(^)(NSError *error))callback {
-    NSAssert(self.contentURL, @"Invalid contentURL");
+    NSAssert(self.contentURL, @"Direct URLs to natively supported formats such as MP4 do not require calling this method.");
 }
 
 - (void)thumbImage:(YKQualityOptions)quality completion:(void(^)(UIImage *thumbImage, NSError *error))callback {

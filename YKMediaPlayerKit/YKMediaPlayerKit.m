@@ -52,15 +52,22 @@ NSString *const kVideoNotSupported = @"Video not supported";
             break;
         case YKVideoTypeDirect:
             self.video = [[YKDirectVideo alloc] initWithContent:self.contentURL];
-            break;
-        case YKVideoTypeUnknown:
+            
             if (callback) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    callback(YKVideoTypeUnknown, nil, NSErrorFromString(1, kVideoNotSupported));
-                    return;
+                    callback(self.videoType, self.video, nil);
                 });
             }
-            break;
+            return;
+        case YKVideoTypeUnknown:
+            self.video = [[YKUnKnownVideo alloc] initWithContent:self.contentURL];
+            
+            if (callback) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    callback(self.videoType, self.video, nil);
+                });
+            }
+            return;
     }
     
     [self.video parseWithCompletion:^(NSError *error) {
