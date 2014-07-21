@@ -79,7 +79,7 @@ NSString *const kVideoNotSupported = @"Video not supported";
     }];
 }
 
-- (void)playUsingBlock:(void(^)(YKVideoTypeOptions, id<YKVideo>, NSError *))callback {
+- (void)playWithCompletion:(void(^)(YKVideoTypeOptions, id<YKVideo>, NSError *))callback {
     [self parseWithCompletion:^(YKVideoTypeOptions videoType, id<YKVideo> video, NSError *error) {
         [self.video play:self.videoQuality];
     }];
@@ -128,11 +128,11 @@ NSString *const kVideoNotSupported = @"Video not supported";
     }];
 }
 
-+ (void)play:(NSURL *)contentURL quality:(YKQualityOptions)quality usingBlock:(void(^)(YKVideoTypeOptions, id<YKVideo>, NSError *))callback {
++ (void)play:(NSURL *)contentURL quality:(YKQualityOptions)quality completion:(void(^)(YKVideoTypeOptions, id<YKVideo>, NSError *))callback {
     YKMediaPlayerKit *playerKit = [[YKMediaPlayerKit alloc] initWithURL:contentURL];
     playerKit.videoQuality = quality;
     
-    [playerKit playUsingBlock:^(YKVideoTypeOptions videoType, id<YKVideo> video, NSError *error) {
+    [playerKit playWithCompletion:^(YKVideoTypeOptions videoType, id<YKVideo> video, NSError *error) {
         if (callback) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 callback(videoType, video, error);
@@ -141,7 +141,7 @@ NSString *const kVideoNotSupported = @"Video not supported";
     }];
 }
 
-+ (void)thumb:(NSURL *)contentURL quality:(YKQualityOptions)quality usingBlock:(void(^)(UIImage *thumb, NSError *))callback {
++ (void)thumb:(NSURL *)contentURL quality:(YKQualityOptions)quality completion:(void(^)(UIImage *thumb, NSError *))callback {
     YKMediaPlayerKit *playerKit = [[YKMediaPlayerKit alloc] initWithURL:contentURL];
     playerKit.thumbQuality = quality;
     

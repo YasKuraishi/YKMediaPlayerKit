@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, YKVideoTypeOptions) {
 /**
  Loads video info and plays it in modal play view controller
  */
-- (void)playUsingBlock:(void(^)(YKVideoTypeOptions videoType, id<YKVideo> video, NSError *error))callback;
+- (void)playWithCompletion:(void(^)(YKVideoTypeOptions videoType, id<YKVideo> video, NSError *error))callback;
 
 /**
  Loads video thumbnail
@@ -62,12 +62,12 @@ typedef NS_ENUM(NSUInteger, YKVideoTypeOptions) {
 /**
  Loads video info and plays it in modal play view controller
  */
-+ (void)play:(NSURL *)contentURL quality:(YKQualityOptions)quality usingBlock:(void(^)(YKVideoTypeOptions, id<YKVideo>, NSError *))callback;
++ (void)play:(NSURL *)contentURL quality:(YKQualityOptions)quality completion:(void(^)(YKVideoTypeOptions, id<YKVideo>, NSError *))callback;
 
 /**
  Loads video thumbnail
  */
-+ (void)thumb:(NSURL *)contentURL quality:(YKQualityOptions)quality usingBlock:(void(^)(UIImage *thumb, NSError *))callback;
++ (void)thumb:(NSURL *)contentURL quality:(YKQualityOptions)quality completion:(void(^)(UIImage *thumb, NSError *))callback;
 
 
 @end
