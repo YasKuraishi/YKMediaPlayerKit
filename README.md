@@ -11,45 +11,50 @@ Its blocks based and works asynchronously and returns all block callbacks on the
 
 Play **YouTube** video and fetch its thumbnail.
 
-    NSString *videoLink = @""http://www.youtube.com/watch?v=1hZ98an9wjo";"
-    YKYouTubeVideo *youTubeVideo = [[YKYouTubeVideo alloc] initWithContent:[NSURL URLWithString:videoLink]];
+```objc
+NSString *videoLink = @""http://www.youtube.com/watch?v=1hZ98an9wjo";"
+YKYouTubeVideo *youTubeVideo = [[YKYouTubeVideo alloc] initWithContent:[NSURL URLWithString:videoLink]];
     
-    //Fetch thumbnail
-    [youTubeVideo parseWithCompletion:^(NSError *error) {
-        [youTubeVideo thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
-            //Set thumbImage to UIImageView here
-        }];
+//Fetch thumbnail
+[youTubeVideo parseWithCompletion:^(NSError *error) {
+    [youTubeVideo thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
+        //Set thumbImage to UIImageView here
     }];
+}];
     
-    //Then play (make sure that you have called parseWithCompletion before calling this method)
-     [youTubeVideo play:YKQualityHigh];
-    
+//Then play (make sure that you have called parseWithCompletion before calling this method)
+[youTubeVideo play:YKQualityHigh];
+```    
 
 Exactly the same for **Vimeo** videos.
 
-    NSString *videoLink = @"http://vimeo.com/42893621";
-    YKVimeoVideo *vimeoVideo = [[YKVimeoVideo alloc] initWithContent:[NSURL URLWithString:videoLink]];
+```objc
+NSString *videoLink = @"http://vimeo.com/42893621";
+YKVimeoVideo *vimeoVideo = [[YKVimeoVideo alloc] initWithContent:[NSURL URLWithString:videoLink]];
     
-    [vimeoVideo parseWithCompletion:^(NSError *error) {
-        [vimeoVideo thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
-            //Set thumbImage to UIImageView here
-        }];
-    }];
-    
-    //Then play (make sure that you have called parseWithCompletion before calling this method)
-     [vimeoVideo play:YKQualityHigh];
-     
- Finaly playing and fetching thumbnails from an iOS supported native video format such as **.MP4, .MOV, .MPV, .3GP**
- 
-    NSString *videoLink = @"http://download.wavetlan.com/SVV/Media/HTTP/BlackBerry.mov";
-    YKDirectVideo *directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:videoLink]];
-    
-    [directVideo thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
+[vimeoVideo parseWithCompletion:^(NSError *error) {
+    [vimeoVideo thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
         //Set thumbImage to UIImageView here
     }];
+}];
     
-    //Then play 
-     [directVideo play:YKQualityHigh];
+//Then play (make sure that you have called parseWithCompletion before calling this method)
+[vimeoVideo play:YKQualityHigh];
+```
+
+ Finaly playing and fetching thumbnails from an iOS supported native video format such as **.MP4, .MOV, .MPV, .3GP**
+ 
+```objc
+NSString *videoLink = @"http://download.wavetlan.com/SVV/Media/HTTP/BlackBerry.mov";
+YKDirectVideo *directVideo = [[YKDirectVideo alloc] initWithContent:[NSURL URLWithString:videoLink]];
+    
+[directVideo thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
+    //Set thumbImage to UIImageView here
+}];
+    
+//Then play 
+[directVideo play:YKQualityHigh];
+```
 
 ### How To Setup    
 
