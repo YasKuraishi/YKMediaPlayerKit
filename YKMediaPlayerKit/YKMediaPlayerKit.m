@@ -164,7 +164,7 @@ NSString *const kVideoNotSupported = @"Video not supported";
         return YKVideoTypeDirect;
     } else if ([strURL hasPrefix:@"assets-library://"] && [strURL hasSuffix:@"&ext=MOV"]) {
         return YKVideoTypeDirect;
-    } else if ([self.contentURL.host.lowercaseString hasSuffix:@"youtube.com"]) {
+    } else if ([self.contentURL.host.lowercaseString hasSuffix:@"youtube.com"] || [self.contentURL.host.lowercaseString hasSuffix:@"youtu.be"]) {
         return YKVideoTypeYouTube;
     } else if ([self.contentURL.host.lowercaseString hasSuffix:@"vimeo.com"]) {
         return YKVideoTypeVimeo;
