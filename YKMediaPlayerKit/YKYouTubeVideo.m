@@ -7,7 +7,7 @@
 //
 
 #import "YKYouTubeVideo.h"
-#import "HCYoutubeParser.h"
+#import <HCYoutubeParser/HCYoutubeParser.h>
 
 @interface YKYouTubeVideo()
 @property (nonatomic, strong) MPMoviePlayerViewController *player;

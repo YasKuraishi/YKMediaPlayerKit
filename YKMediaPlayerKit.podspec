@@ -12,4 +12,6 @@ Pod::Spec.new do |s|
   s.source_files = 'YKTwitterHelper', 'YKMediaPlayerKit/**/*.{h,m}'
   s.frameworks   = 'UIKit', 'CoreGraphics'
   s.requires_arc = true
+
+  s.dependency 'HCYoutubeParser', '~> 0.0'
 end
