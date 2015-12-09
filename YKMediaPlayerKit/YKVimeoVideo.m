@@ -7,8 +7,7 @@
 //
 
 #import "YKVimeoVideo.h"
-
-NSString *const kVideoConfigURL = @"http://player.vimeo.com/video/%@/config";
+#import <IGVimeoExtractor/IGVimeoExtractor.h>
 
 @interface YKVimeoVideo()
 @property (nonatomic, strong) NSString *videoID;
@@ -41,30 +40,48 @@ NSString *const kVideoConfigURL = @"http://player.vimeo.com/video/%@/config";
         return NO;
     };
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSError *error;
-        NSString *dataURL = [NSString stringWithFormat:kVideoConfigURL, self.videoID];
-        NSString *data = [NSString stringWithContentsOfURL:[NSURL URLWithString:dataURL] encoding:NSUTF8StringEncoding error:&error];
-        
-        if (callback_if_error(error)) return;
-        
-        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding]
-                                                                 options:NSJSONReadingAllowFragments
-                                                                   error:&error];
-        
-        if (callback_if_error(error)) return;
-        
-        self.videos = [jsonData valueForKeyPath:@"request.files.h264"];
-        self.thumbs = [jsonData valueForKeyPath:@"video.thumbs"];
+    
+    [IGVimeoExtractor fetchVideoURLFromURL:[self.contentURL absoluteString] completionHandler:^(NSArray<IGVimeoVideo *> * _Nullable videos, NSError * _Nullable error) {
 
+        if (callback_if_error(error)) return;
+
+        self.videos = [[self class] videosDictionary:videos];
+        self.thumbs = [[self class] thumbsDictionary:videos];
+        
         if (callback) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 callback(nil);
             });
-        }
-    });
+        }        
+    }];
+
 }
 
++ (NSDictionary*) videosDictionary:(NSArray<IGVimeoVideo*>*) videos {
+
+    NSMutableDictionary<NSNumber*,NSURL*> * dict = [NSMutableDictionary dictionaryWithCapacity:videos.count];
+    
+    for(IGVimeoVideo* video in videos) {
+        
+        dict[@(video.quality)] = video.videoURL;
+    }
+    
+    return dict;
+    
+}
+
++ (NSDictionary*) thumbsDictionary:(NSArray<IGVimeoVideo*>*) videos {
+    
+    NSMutableDictionary<NSNumber*,NSURL*> * dict = [NSMutableDictionary dictionaryWithCapacity:videos.count];
+    
+    for(IGVimeoVideo* video in videos) {
+        
+        dict[@(video.quality)] = video.thumbnailURL;
+    }
+    
+    return dict;
+    
+}
 - (void)thumbImage:(YKQualityOptions)quality completion:(void(^)(UIImage *, NSError *))callback {
     NSAssert(callback, @"usingBlock cannot be nil");
     
@@ -79,45 +96,46 @@ NSString *const kVideoConfigURL = @"http://player.vimeo.com/video/%@/config";
 }
 
 - (NSURL *)videoURL:(YKQualityOptions)quality {
-    NSDictionary *data = nil;
+    NSURL *url = nil;
     
     switch (quality) {
         case YKQualityLow:
-            data = self.videos[@"mobile"];
+            url = self.videos[@(IGVimeoVideoQualityLow)];
             break;
         case YKQualityMedium:
-            data = self.videos[@"ds"];
+            url = self.videos[@(IGVimeoVideoQualityMedium)];
             break;
         case YKQualityHigh:
-            data = self.videos[@"hd"];
+            url = self.videos[@(IGVimeoVideoQualityHigh)]?: self.videos[@(IGVimeoVideoQualityBest)];
     }
     
-    if (!data && self.videos.count > 0) {
-        data = [self.videos allValues][0]; //defaults to 1st index
+    if (!url && self.videos.count > 0) {
+        url = [self.videos allValues][0]; //defaults to 1st index
     }
     
-    return data ? [NSURL URLWithString:data[@"url"]] : nil;
+    return url;
 }
 
 - (NSURL *)thumbURL:(YKQualityOptions)quality {
-    NSString *strURL = nil;
-    
+    NSURL *url = nil;
     switch (quality) {
         case YKQualityLow:
-            strURL = self.thumbs[@"640"];
+            url = self.thumbs[@(IGVimeoVideoQualityLow)];
             break;
         case YKQualityMedium:
-            strURL = self.thumbs[@"960"];
+            url = self.thumbs[@(IGVimeoVideoQualityMedium)];
             break;
         case YKQualityHigh:
-            strURL = self.thumbs[@"1280"];
+            url = self.thumbs[@(IGVimeoVideoQualityHigh)];
+        default:
+            url = self.thumbs[@(IGVimeoVideoQualityBest)];
     }
     
-    if (!strURL && self.thumbs.count > 0) {
-        strURL = [self.thumbs allValues][0]; //defaults to 1st index
+    if (!url && self.thumbs.count > 0) {
+        url = [self.thumbs allValues][0]; //defaults to 1st index
     }
-    
-    return strURL ? [NSURL URLWithString:strURL] : nil;
+
+    return url;
 }
 
 - (MPMoviePlayerViewController *)movieViewController:(YKQualityOptions)quality {

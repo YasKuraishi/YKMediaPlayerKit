@@ -20,12 +20,12 @@
     Videos found for above mentioned content url. 
     Available after parseWithCompletion is executed.
  */
-@property (nonatomic, strong) NSDictionary *videos;
+@property (nonatomic, copy) NSDictionary *videos;
 
 /**
     Thumbnails found for this video. 
     Available after parseWithCompletion is executed.
  */
-@property (nonatomic, strong) NSDictionary *thumbs;
+@property (nonatomic, copy) NSDictionary *thumbs;
 
 @end
