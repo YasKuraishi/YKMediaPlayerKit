@@ -85,6 +85,52 @@ If using `CocoaPods` then add this to your pods file `pod 'YKMediaPlayerKit'` an
 
 Or, simply drag and drop `YKMediaPlayerKit` folder to your project.
 
+#### iOS 9 - App Transport Security
+
+On iOS9, you have to explicitely declared inside the `Info.plist` file the trusted provider.
+
+To make it work with Youtube and Vimeo, please add the following to your `Info.plist`:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSExceptionDomains</key>
+	<dict>
+		<key>vimeo.com</key>
+		<dict>
+			<key>NSIncludesSubdomains</key>
+			<true/>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<true/>
+		</dict>
+		<key>vimeocdn.com</key>
+		<dict>
+			<key>NSIncludesSubdomains</key>
+			<true/>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<true/>
+		</dict>
+		<key>googlevideo.com</key>
+		<dict>
+			<key>NSIncludesSubdomains</key>
+			<true/>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<true/>
+		</dict>
+		<key>youtube.com</key>
+		<dict>
+			<key>NSIncludesSubdomains</key>
+			<true/>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
+```
+
 ###  License
 
 The MIT License (MIT)

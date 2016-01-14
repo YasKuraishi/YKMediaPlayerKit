@@ -14,4 +14,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency 'HCYoutubeParser', '~> 0.0'
+  s.dependency 'IGVimeoExtractor', '~> 1.2'
 end
